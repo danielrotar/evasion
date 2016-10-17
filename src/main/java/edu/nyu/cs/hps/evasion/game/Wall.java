@@ -2,8 +2,8 @@ package edu.nyu.cs.hps.evasion.game;
 
 import java.awt.*;
 
-public abstract class Wall {
+public interface Wall {
 
-  public abstract boolean occupies(Point point);
+  boolean occupies(Point point);
 
 }
