@@ -18,4 +18,12 @@ public class VerticalWall implements Wall {
     return point.x == this.x && point.y >= this.y1 && point.y <= this.y2;
   }
 
+  public String toString(){
+    StringBuilder stringBuilder = new StringBuilder()
+      .append("0").append(" ")
+      .append(x).append(" ")
+      .append(y1).append(" ")
+      .append(y2);
+    return stringBuilder.toString();
+  }
 }

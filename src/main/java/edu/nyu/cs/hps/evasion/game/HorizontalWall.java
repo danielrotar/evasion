@@ -15,7 +15,15 @@ public class HorizontalWall implements Wall {
   }
 
   public boolean occupies(Point point){
-    return point.y == this.y && point.y >= this.x1 && point.y <= this.x2;
+    return point.y == this.y && point.x >= this.x1 && point.x <= this.x2;
   }
 
+  public String toString(){
+    StringBuilder stringBuilder = new StringBuilder()
+      .append("0").append(" ")
+      .append(y).append(" ")
+      .append(x1).append(" ")
+      .append(x2);
+    return stringBuilder.toString();
+  }
 }
