@@ -9,6 +9,7 @@ public class GameState {
   public long ticknum;
   public int maxWalls;
   public int wallPlacementDelay;
+  public Point boardSize;
   public int wallTimer;
   public PositionAndVelocity hunterPosAndVel;
   public Point preyPos;
@@ -20,8 +21,9 @@ public class GameState {
     this.wallPlacementDelay = wallPlacementDelay;
     this.wallTimer = 0;
     this.hunterPosAndVel = new PositionAndVelocity(new Point(0, 0), new Point(1,1));
-    this.preyPos = new Point(23, 20);
+    this.preyPos = new Point(230, 200);
     this.ticknum = 0;
+    this.boardSize = new Point(300,300);
   }
 
   public String toString(){
@@ -29,6 +31,8 @@ public class GameState {
       .append(ticknum).append(" ")
       .append(maxWalls).append(" ")
       .append(wallPlacementDelay).append(" ")
+      .append(boardSize.x).append(" ")
+      .append(boardSize.y).append(" ")
       .append(wallTimer).append(" ")
       .append(hunterPosAndVel.pos.x).append(" ")
       .append(hunterPosAndVel.pos.y).append(" ")

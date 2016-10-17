@@ -7,8 +7,6 @@ public class Game {
 
   private GameState state;
 
-  private final static Point BOARD_SIZE = new Point(100,100);
-
   public enum WallCreationType {
     NONE,
     HORIZONTAL,
@@ -37,7 +35,7 @@ public class Game {
   }
 
   private boolean isOccupied(Point p) {
-    if(p.x < 0 || p.x >= BOARD_SIZE.x || p.y < 0 || p.y >= BOARD_SIZE.y){
+    if(p.x < 0 || p.x >= state.boardSize.x || p.y < 0 || p.y >= state.boardSize.y){
       return true;
     }
     for(Wall wall : state.walls){
