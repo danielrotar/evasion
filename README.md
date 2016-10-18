@@ -87,6 +87,8 @@ The current game is over when the server sends the message `hunter` or `prey`, m
 
 Sample player code can be found in the "players" directory (random_player.py).
 
+To run: `python random_player.py [port on which to connect]`
+
 # TODO
 
 * Prevent game over when prey and hunter are close but separated by a wall.
