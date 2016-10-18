@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d1534c-35b7-4262-a6c1-f26de0e726ee" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java" afterPath="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java" />
     </list>
     <ignored path="evasion.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,14 +28,14 @@
       <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+            <state relative-caret-position="150">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameHost.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameHost.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+            <state relative-caret-position="390">
+              <caret line="83" column="82" selection-start-line="83" selection-start-column="82" selection-end-line="83" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -156,11 +156,11 @@
         <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/HorizontalWall.java" />
         <option value="$PROJECT_DIR$/players/random_player.py" />
         <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/IO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/Application.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java" />
       </list>
     </option>
   </component>
@@ -845,12 +845,12 @@
       <updated>1476411701925</updated>
       <workItem from="1476411703266" duration="32021000" />
       <workItem from="1476735333357" duration="596000" />
-      <workItem from="1476774653585" duration="563000" />
+      <workItem from="1476774653585" duration="1192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33180000" />
+    <option name="totallyTimeSpent" value="33809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="23" width="1399" height="864" extended-state="0" />
@@ -1231,26 +1231,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        <state relative-caret-position="390">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        <state relative-caret-position="150">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/nyu/cs/hps/evasion/game/GameHost.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <caret line="83" column="82" selection-start-line="83" selection-start-column="82" selection-end-line="83" selection-end-column="82" />
           <folding />
         </state>
       </provider>
