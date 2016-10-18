@@ -34,6 +34,8 @@ public class GameHost {
       io.sendLine(hunterIndex, "hunter");
       io.sendLine(preyIndex, "prey");
 
+      Thread.sleep(1000 / 60);
+
       boolean done = false;
       while (!done) {
         String gameString = gameNum + " " + game.getState().toString();
