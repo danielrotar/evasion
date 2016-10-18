@@ -24,6 +24,7 @@
         <configuration>
           <archive>
             <manifest>
+              <addClasspath>true</addClasspath>
               <mainClass>edu.nyu.cs.hps.evasion.Application</mainClass>
             </manifest>
           </archive>
