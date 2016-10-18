@@ -45,7 +45,9 @@ Each "{wall info}" above is just a set of numbers describing a wall on the playi
 
 A horizontal wall is identified by: `0 [y] [x1] [x2]` where `y` is its y location, `x1` is the x location of its left-most pixel, and `x2` is the x location of its right-most pixel. 
 
-A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location, `y1` is the y location of its top-most pixel, and `y2` is the y location of its bottom-most pixel. The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
+A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location, `y1` is the y location of its top-most pixel, and `y2` is the y location of its bottom-most pixel. 
+
+The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
 
 In response to each received game state message, the hunter should send the following:
 
