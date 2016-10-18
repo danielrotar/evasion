@@ -45,9 +45,9 @@ Immediately after that, the game will commence and the server will begin sending
 
 Each "{wall info}" above is just a set of numbers describing a wall on the playing field. There will be `[numWalls]` such sets.
 
-A horizontal wall is identified by: `0 [y] [x1] [x2]` where `y` is its y location, `x1` is the x location of its left-most pixel, and `x2` is the x location of its right-most pixel. 
+A horizontal wall is identified by: `0 [y] [x1] [x2]` where `y` is its y location, `x1` is the x location of its left-most pixel (e.g. smaller x value), and `x2` is the x location of its right-most pixel (e.g. larger x value). 
 
-A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location, `y1` is the y location of its top-most pixel, and `y2` is the y location of its bottom-most pixel. 
+A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location, `y1` is the y location of its bottom-most pixel (e.g. smaller y value), and `y2` is the y location of its top-most pixel (e.g. larger y value). 
 
 The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
 
