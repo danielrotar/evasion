@@ -23,6 +23,7 @@
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
+            <index>true</index>
             <manifest>
               <addClasspath>true</addClasspath>
               <mainClass>edu.nyu.cs.hps.evasion.Application</mainClass>
