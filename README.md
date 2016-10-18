@@ -83,6 +83,10 @@ Note that game ticks occur each 1/60 of a second, and the server will not wait l
 
 The current game is over when the server sends the message `hunter` or `prey`, meaning a new game is about to start, or `done`, meaning the session is over and the player should disconnect.
 
+# Player code
+
+Sample player code can be found in the "players" directory (random_player.py).
+
 # TODO
 
 * Prevent game over when prey and hunter are close but separated by a wall.
