@@ -40,7 +40,7 @@ Multiple games will be played during a single session. At the start of each game
 Immediately after that, the game will commence and the server will begin sending messages containing the full game state at each iteration to each player. These messages look like:
 
 ```
-[gamenum] [ticknum] [maxWalls] [wallPlacementDelay] [boardsizeX] [boardsizeY] [currentWallTimer] [hunterXPos] [hunterYPos] [hunterXVel] [hunterYVel] [preyXPos] [preyYPos] [numWalls] {wall1 info} {wall2 info} ... 
+[gameNum] [tickNum] [maxWalls] [wallPlacementDelay] [boardsizeX] [boardsizeY] [currentWallTimer] [hunterXPos] [hunterYPos] [hunterXVel] [hunterYVel] [preyXPos] [preyYPos] [numWalls] {wall1 info} {wall2 info} ... 
 ```
 
 Each "{wall info}" above is just a set of numbers describing a wall on the playing field. There will be `[numWalls]` such sets.
@@ -56,10 +56,10 @@ The order of the `{wall info}` sets is relevent; when the hunter references a wa
 In response to each received game state message, the hunter should send the following:
 
 ```
-[gamenum] [ticknum] [wall type to add] [wall index to delete] [wall index to delete] [wall index to delete] ...
+[gameNum] [tickNum] [wall type to add] [wall index to delete] [wall index to delete] [wall index to delete] ...
 ```
 
-`[gamenum]` and `[ticknum]` should be relayed directly back to the server based on which game state message this action is in response to. 
+`[gameNum]` and `[tickNum]` should be relayed directly back to the server based on which game state message this action is in response to. 
 
 `[wall type to add]` should be 0 for no wall, 1 for horizontal wall, 2 for vertical wall. There is no penalty for asking for a wall that can't be built for whatever reason.
 
@@ -70,16 +70,16 @@ Each `[wall index to delete]` specifies a wall to be deleted, based on its posit
 In response to each received game state message, the prey should send the following:
 
 ```
-[gamenum] [ticknum] [x movement] [y movement]
+[gameNum] [tickNum] [x movement] [y movement]
 ```
 
-`[gamenum]` and `[ticknum]` should be relayed directly back to the server based on which game state message this action is in response to. 
+`[gameNum]` and `[tickNum]` should be relayed directly back to the server based on which game state message this action is in response to. 
 
-The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- values outside this range will be clamped. On ticks in which the prey can't move, these fields will have no effect, but placeholder values should still be sent.
+The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- values outside this range will be clamped. On ticks in which the prey can't move (`tickNum % 2 == 0`), these fields will have no effect, but placeholder values should still be sent.
 
 # Other notes
 
-Note that game ticks occur each 1/60 of a second, and the server will not wait longer than that for a player's command in response to each tick. Any outdated commands as identified by `gamenum` and `ticknum` will be discarded (the server console will display a message in this case for debugging purposes, however.)
+Note that game ticks occur each 1/60 of a second, and the server will not wait longer than that for a player's command in response to each tick. Any outdated commands as identified by `gameNum` and `tickNum` will be discarded (the server console will display a message in this case for debugging purposes, however.)
 
 The current game is over when the server sends the message `hunter` or `prey`, meaning a new game is about to start, or `done`, meaning the session is over and the player should disconnect.
 
