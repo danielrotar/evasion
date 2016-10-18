@@ -81,7 +81,7 @@ The x and y movement specifies the direction in which the prey wishes to travel.
 
 Note that game ticks occur each 1/60 of a second, and the server will not wait longer than that for a player's command in response to each tick. Any outdated commands as identified by `gamenum` and `ticknum` will be discarded (the server console will display a message in this case for debugging purposes, however.)
 
-The current game is over when the server sends the message "hunter" or "prey", meaning a new game is about to start, or "done", meaning the session is over and the player should disconnect.
+The current game is over when the server sends the message `hunter` or `prey`, meaning a new game is about to start, or `done`, meaning the session is over and the player should disconnect.
 
 # TODO
 
