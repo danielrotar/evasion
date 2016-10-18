@@ -1,6 +1,6 @@
 # evasion
 
-This is the implementation of the architecture for the [evasion game](http://cs.nyu.edu/courses/fall16/CSCI-GA.2965-001/evasion.html). Any questions, requests, or bug reporting, please contact me at dmr465@nyu.edu!
+This is the implementation of the architecture for the [evasion game](http://cs.nyu.edu/courses/fall16/CSCI-GA.2965-001/evasion.html). Any questions, requests, or bug reporting, please contact me at dmr465@nyu.edu or via class mailing list!
 
 # Requirements
 
