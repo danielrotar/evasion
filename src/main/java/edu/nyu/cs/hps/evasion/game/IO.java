@@ -46,15 +46,24 @@ public class IO {
       info.in = new PrintWriter(info.clientSocket.getOutputStream(), true);
       info.out = new BufferedReader(new InputStreamReader(info.clientSocket.getInputStream()));
 
-      info.finish = info.pool.submit(() -> {
-        try {
+      info.pool.submit(() -> {
           String line;
           while ((line = info.out.readLine()) != null) {
             if(line.startsWith("name:")){
               info.name = line.substring(5).trim();
-            } else {
-              info.latestLine = line;
+              break;
             }
+          }
+          return true;
+      }).get();
+
+      System.out.println("Hello " + info.name + " (player " + (info.index+1) + ")");
+
+      info.finish = info.pool.submit(() -> {
+        try {
+          String line;
+          while ((line = info.out.readLine()) != null) {
+            info.latestLine = line;
           }
           return true;
         }

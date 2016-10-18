@@ -63,10 +63,10 @@ public class GameHost {
               hunterWallsToDelete = data.subList(3, data.size());
             }
           } else {
-            System.out.println("Player " + (hunterIndex+1) + " is lagging; missed tick " + game.getState().ticknum);
+            System.out.println(io.getName(hunterIndex) + " is lagging; missed tick " + game.getState().ticknum);
           }
         } else {
-          System.out.println("Player " + (hunterIndex+1) + " has not given input.");
+          System.out.println(io.getName(hunterIndex) + " has not given input.");
         }
         if (preyInput != null) {
           List<Integer> data = Arrays.stream(preyInput.split("\\s+"))
@@ -78,10 +78,10 @@ public class GameHost {
               preyMovement.y = data.get(3);
             }
           } else {
-            System.out.println("Player " + (preyIndex+1) + " is lagging; missed tick " + game.getState().ticknum);
+            System.out.println(io.getName(preyIndex) + " is lagging; missed tick " + game.getState().ticknum);
           }
         } else {
-          System.out.println("Player " + (preyIndex+1) + " has not given input.");
+          System.out.println(io.getName(preyIndex) + " has not given input.");
         }
 
         done = game.tick(hunterWallAction, hunterWallsToDelete, preyMovement);
