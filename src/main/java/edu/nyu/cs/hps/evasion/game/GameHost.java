@@ -28,7 +28,7 @@ public class GameHost {
     int p1AsPreyScore = 0;
     int p2AsPreyScore = 0;
 
-    while(gameNum < 8) {
+    while(gameNum < 2) {
       Game game = new Game(maxWalls, wallPlacementDelay);
 
       io.sendLine(hunterIndex, "hunter");
@@ -63,7 +63,7 @@ public class GameHost {
               hunterWallsToDelete = data.subList(3, data.size());
             }
           } else {
-            System.out.println("Player " + (hunterIndex+1) + " is lagging.");
+            System.out.println("Player " + (hunterIndex+1) + " is lagging; missed tick " + game.getState().ticknum);
           }
         } else {
           System.out.println("Player " + (hunterIndex+1) + " has not given input.");
@@ -78,7 +78,7 @@ public class GameHost {
               preyMovement.y = data.get(3);
             }
           } else {
-            System.out.println("Player " + (preyIndex+1) + " is lagging.");
+            System.out.println("Player " + (preyIndex+1) + " is lagging; missed tick " + game.getState().ticknum);
           }
         } else {
           System.out.println("Player " + (preyIndex+1) + " has not given input.");

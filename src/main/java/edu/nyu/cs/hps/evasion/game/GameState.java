@@ -37,7 +37,7 @@ public class GameState {
       .append(hunterPosAndVel.pos.x).append(" ")
       .append(hunterPosAndVel.pos.y).append(" ")
       .append(hunterPosAndVel.vel.x).append(" ")
-      .append(hunterPosAndVel.vel.x).append(" ")
+      .append(hunterPosAndVel.vel.y).append(" ")
       .append(preyPos.x).append(" ")
       .append(preyPos.y).append(" ")
       .append(walls.size());
