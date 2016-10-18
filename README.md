@@ -22,6 +22,8 @@ mvn clean package
 
 # Run
 
+(on energon2)
+
 ```
 module load java-1.8
 java -jar ./target/evasion-1.0-SNAPSHOT.jar [player 1 port] [player 2 port] [max walls] [wall placement delay]
