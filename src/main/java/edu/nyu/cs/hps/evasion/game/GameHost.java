@@ -99,6 +99,8 @@ public class GameHost {
       hunterIndex = 1-hunterIndex;
       preyIndex = 1-preyIndex;
       gameNum++;
+
+      Thread.sleep(1000 / 60);
     }
 
     if(p1AsPreyScore == p2AsPreyScore){
