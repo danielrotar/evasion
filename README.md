@@ -49,6 +49,8 @@ A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location,
 
 The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
 
+# Hunter
+
 In response to each received game state message, the hunter should send the following:
 
 ```
@@ -61,6 +63,8 @@ In response to each received game state message, the hunter should send the foll
 
 Each `[wall index to delete]` specifies a wall to be deleted, based on its position (starting at 0) in the game state message. There can be any number of these, or none.
 
+#Prey
+
 In response to each received game state message, the prey should send the following:
 
 ```
@@ -70,6 +74,8 @@ In response to each received game state message, the prey should send the follow
 `[gamenum]` and `[ticknum]` should be relayed directly back to the server based on which game state message this action is in response to. 
 
 The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- values outside this range will be clamped. On ticks in which the prey can't move, these fields will have no effect, but placeholder values should still be sent.
+
+# Other notes
 
 Note that game ticks occur each 1/60 of a second, and the server will not wait longer than that for a player's command in response to each tick. Any outdated commands as identified by `gamenum` and `ticknum` will be discarded (the server console will display a message in this case for debugging purposes, however.)
 
