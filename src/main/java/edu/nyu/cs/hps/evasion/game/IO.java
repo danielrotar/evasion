@@ -1,7 +1,5 @@
 package edu.nyu.cs.hps.evasion.game;
 
-import com.diffplug.common.base.Errors;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -53,16 +51,7 @@ public class IO {
       info.in = new PrintWriter(info.clientSocket.getOutputStream(), true);
       info.out = new BufferedReader(new InputStreamReader(info.clientSocket.getInputStream()));
 
-      info.pool.submit(() -> {
-          String line;
-          while ((line = info.out.readLine()) != null) {
-            if(line.startsWith("name:")){
-              info.name = line.substring(5).trim();
-              break;
-            }
-          }
-          return true;
-      }).get();
+      info.name = getResponse(info.index, "sendname").get().message;
 
       System.out.println("Hello " + info.name + " (player " + (info.index+1) + ")");
     }
@@ -83,8 +72,6 @@ public class IO {
       response.message = info.out.readLine();
       Instant now = Instant.now();
       response.elapsed = Duration.between(start, now);
-      System.out.println("Elapsed for player " + (info.index+1) + ": " + response.elapsed.toMillis()/1000.0);
-      System.out.println(response.message);
       return response;
     });
   }
