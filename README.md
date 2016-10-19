@@ -33,14 +33,14 @@ java -jar ./target/evasion-1.0-SNAPSHOT.jar [player 1 port] [player 2 port] [max
 
 Players should connect on the ports specified as arguments to the jar after it has started executing. Each message sent in either direction (to client or to server) should/will end with a newline.
 
-Upon connecting, players must send `name: [their team name]` so that the server can identify them by name. The game won't start until both players have done so.
+Upon connecting, players will be promted with `sendname`; they should respond with their team name. The game won't start until both players have done so.
 
-Multiple games will be played during a single session. At the start of each game, the player will receive the message `hunter` or `prey`, which identifies their role in the upcoming match.
+Multiple games will be played during a single session. At the start of each game, the player will receive the message `hunter` or `prey`, which identifies their role in the upcoming match. Players should not respond to this message.
 
 Immediately after that, the game will commence and the server will begin sending messages containing the full game state at each iteration to each player. These messages look like:
 
 ```
-[gameNum] [tickNum] [maxWalls] [wallPlacementDelay] [boardsizeX] [boardsizeY] [currentWallTimer] [hunterXPos] [hunterYPos] [hunterXVel] [hunterYVel] [preyXPos] [preyYPos] [numWalls] {wall1 info} {wall2 info} ... 
+[playerTimeLeft] [gameNum] [tickNum] [maxWalls] [wallPlacementDelay] [boardsizeX] [boardsizeY] [currentWallTimer] [hunterXPos] [hunterYPos] [hunterXVel] [hunterYVel] [preyXPos] [preyYPos] [numWalls] {wall1 info} {wall2 info} ... 
 ```
 
 Each "{wall info}" above is just a set of numbers describing a wall on the playing field. There will be `[numWalls]` such sets.
@@ -50,6 +50,8 @@ A horizontal wall is identified by: `0 [y] [x1] [x2]` where `y` is its y locatio
 A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location, `y1` is the y location of its bottom-most pixel (e.g. smaller y value), and `y2` is the y location of its top-most pixel (e.g. larger y value). 
 
 The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
+
+Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player. (Players are not permitted to know how close their opponents are to exhausting their time limits.)
 
 # Hunter
 
@@ -79,7 +81,7 @@ The x and y movement specifies the direction in which the prey wishes to travel.
 
 # Other notes
 
-Note that game ticks occur each 1/60 of a second, and the server will not wait longer than that for a player's command in response to each tick. Any outdated commands as identified by `gameNum` and `tickNum` will be discarded (the server console will display a message in this case for debugging purposes, however.)
+Each player has two minutes of "thinking" time, which can be distributed across ticks as they see fit. If a player's total elapsed time reaches zero on any turn, they forfeit. (Note: this is basically the opposite of what was described in class -- the realtime, 1/60th of a second per tick, server-ignoring-old-moves system has been scrapped.)
 
 The current game is over when the server sends the message `hunter` or `prey`, meaning a new game is about to start, or `done`, meaning the session is over and the player should disconnect.
 
