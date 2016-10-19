@@ -2,6 +2,8 @@
 import socket
 import random
 import sys
+import time
+import random
 
 host = "localhost"
 port = int(sys.argv[1])
@@ -24,7 +26,13 @@ while True:
             break
         else:
             continue
-    print "received: " + line
+    #print "received: " + line
+    val = .1 + random.uniform(0,1)
+    #print "will sleep for: " + str(val)
+    start = time.time()
+    time.sleep(val)
+    now = time.time()
+    print "actually slept for: " + str(now-start)
     if line == "done":
         break
     elif line == "hunter":
@@ -42,12 +50,12 @@ while True:
                 wall = "2"
             if random.randint(0,20) == 0:
                 wall = "0 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20"
-            tosend = data[0] + " " + data[1] + " " + wall
-            print "sending: " + tosend
+            tosend = data[1] + " " + data[2] + " " + wall
+            #print "sending: " + tosend
             sock.sendall(tosend + "\n")
         else:
             x = random.randint(-1,1)
             y = random.randint(-1,1)
-            tosend = data[0] + " " + data[1] + " " + str(x) + " " + str(y)
-            print "sending: " + tosend
+            tosend = data[1] + " " + data[2] + " " + str(x) + " " + str(y)
+            #print "sending: " + tosend
             sock.sendall(tosend + "\n")
