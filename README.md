@@ -33,7 +33,7 @@ java -jar ./target/evasion-1.0-SNAPSHOT.jar [player 1 port] [player 2 port] [max
 
 Players should connect on the ports specified as arguments to the jar after it has started executing. Each message sent in either direction (to client or to server) should/will end with a newline.
 
-Upon connecting, players will be promted with `sendname`; they should respond with their team name. The game won't start until both players have done so.
+Upon connecting, players will be prompted with `sendname`; they should respond with their team name. The game won't start until both players have done so.
 
 Multiple games will be played during a single session. At the start of each game, the player will receive the message `hunter` or `prey`, which identifies their role in the upcoming match. Players should not respond to this message.
 
