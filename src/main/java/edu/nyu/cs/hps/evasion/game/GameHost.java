@@ -37,8 +37,8 @@ public class GameHost {
     int p2Timeouts = 0;
 
     while(gameNum < 2) {
-      Duration hunterTime = Duration.ofSeconds(3);
-      Duration preyTime = Duration.ofSeconds(3);
+      Duration hunterTime = Duration.ofSeconds(120);
+      Duration preyTime = Duration.ofSeconds(120);
 
       Game game = new Game(maxWalls, wallPlacementDelay);
 
