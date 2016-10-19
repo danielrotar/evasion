@@ -131,6 +131,8 @@ First the pixels adjacent to both the hunter and the one being hit are considere
   +-+-+      +-+-+
 ```
 
+(The same calculations are mirrored about the relevant axes for the other three directions in which the hunter can be traveling.)
+
 # Prey
 
 In response to each received game state message, the prey should send the following:
