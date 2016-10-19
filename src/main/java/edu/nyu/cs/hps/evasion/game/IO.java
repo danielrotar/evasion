@@ -5,11 +5,18 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class IO {
+
+  public static class Response {
+    public String message;
+    public Duration elapsed;
+  }
 
   private static class SocketInfo {
     public int index;
@@ -18,8 +25,6 @@ public class IO {
     public ExecutorService pool;
     public PrintWriter in;
     public BufferedReader out;
-    public String latestLine;
-    public Future<Boolean> finish;
     public String name;
   }
 
@@ -46,37 +51,29 @@ public class IO {
       info.in = new PrintWriter(info.clientSocket.getOutputStream(), true);
       info.out = new BufferedReader(new InputStreamReader(info.clientSocket.getInputStream()));
 
-      info.pool.submit(() -> {
-          String line;
-          while ((line = info.out.readLine()) != null) {
-            if(line.startsWith("name:")){
-              info.name = line.substring(5).trim();
-              break;
-            }
-          }
-          return true;
-      }).get();
+      info.name = getResponse(info.index, "sendname").get().message;
 
       System.out.println("Hello " + info.name + " (player " + (info.index+1) + ")");
-
-      info.finish = info.pool.submit(() -> {
-        try {
-          String line;
-          while ((line = info.out.readLine()) != null) {
-            info.latestLine = line;
-          }
-          return true;
-        }
-        catch (Exception e) {
-          return false;
-        }
-      });
     }
   }
 
   public void sendLine(int index, String string){
-    infoList.get(index).in.print(string + "\n");
-    infoList.get(index).in.flush();
+    SocketInfo info = infoList.get(index);
+    info.in.print(string + "\n");
+    info.in.flush();
+  }
+
+  public Future<Response> getResponse(int index, String string) throws Exception {
+    sendLine(index, string);
+    SocketInfo info = infoList.get(index);
+    return info.pool.submit(() -> {
+      Instant start = Instant.now();
+      Response response = new Response();
+      response.message = info.out.readLine();
+      Instant now = Instant.now();
+      response.elapsed = Duration.between(start, now);
+      return response;
+    });
   }
 
   public void destroy() {
@@ -84,16 +81,11 @@ public class IO {
       for(SocketInfo info : infoList) {
         info.clientSocket.close();
         info.serverSocket.close();
-        info.finish.get();
         info.pool.shutdown();
       }
     } catch (Exception e){
       System.out.println(e.getMessage());
     }
-  }
-
-  public String getLatestLine(int index) {
-    return infoList.get(index).latestLine;
   }
 
   public String getName(int index){
