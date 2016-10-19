@@ -67,7 +67,71 @@ In response to each received game state message, the hunter should send the foll
 
 Each `[wall index to delete]` specifies a wall to be deleted, based on its position (starting at 0) in the game state message. There can be any number of these, or none. Asking to delete a wall index that doesn't exist has no effect.
 
-#Prey
+The hunter bounce behavior is as follows (* = wall, arrow = hunter moving in the direction it points):
+
+```
+First the pixels adjacent to both the hunter and the one being hit are considered...
+
++-+-+    +-+-+
+|*| |    |*|↗|
++-+-+ -> +-+-+
+|*|↖|    |*| |
++-+-+    +-+-+
+
++-+-+    +-+-+
+|*|*|    |*|*|
++-+-+ -> +-+-+
+| |↖|    |↙| |
++-+-+    +-+-+
+
++-+-+    +-+-+
+|*|*|    |*|*|
++-+-+ -> +-+-+
+|*|↖|    |*|↘|
++-+-+    +-+-+
+
+
++-+-+
+|*| |
++-+-+  = search is expanded, now including the other pixels adjacent to the one being hit...
+| |↖|
++-+-+
+
+
+  +-+        +-+
+  | |        | |
++-+-+-+    +-+-+-+
+|*|*| | -> |*|*| |
++-+-+-+    +-+-+-+
+  | |↖|      |↙| |
+  +-+-+      +-+-+
+
+  +-+        +-+
+  |*|        |*|
++-+-+-+    +-+-+-+
+| |*| | -> | |*|↗|
++-+-+-+    +-+-+-+
+  | |↖|      | | |
+  +-+-+      +-+-+
+
+  +-+        +-+
+  |*|        |*|
++-+-+-+    +-+-+-+
+|*|*| | -> |*|*| |
++-+-+-+    +-+-+-+
+  | |↖|      | |↘|
+  +-+-+      +-+-+
+
+  +-+        +-+
+  | |        | |
++-+-+-+    +-+-+-+
+| |*| | -> | |*| |
++-+-+-+    +-+-+-+
+  | |↖|      | |↘|
+  +-+-+      +-+-+
+```
+
+# Prey
 
 In response to each received game state message, the prey should send the following:
 
