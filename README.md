@@ -165,6 +165,5 @@ To run: `python random_player.py [port on which to connect]`
 
 # TODO
 
-* Prevent game over when prey and hunter are close but separated by a wall.
 * Design and implement a visual game display.
 * Fix any bugs that are inevitably present.
