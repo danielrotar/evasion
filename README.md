@@ -51,7 +51,7 @@ A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location,
 
 The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
 
-Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player. (Players are not permitted to know how close their opponents are to exhausting their time limits.)
+Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player (and given in milliseconds). (Players are not permitted to know how close their opponents are to exhausting their time limits.)
 
 # Hunter
 
