@@ -63,7 +63,17 @@ public class Game {
   }
 
   private boolean captured(){
-    return state.hunterPosAndVel.pos.distance(state.preyPos) < 4.0;
+    if(state.hunterPosAndVel.pos.distance(state.preyPos) < 4.0){
+      List<Point> pts = BresenhamsAlgorithm.pointsBetween(state.hunterPosAndVel.pos, state.preyPos);
+      for(Point pt : pts){
+        if(isOccupied(pt)){
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private boolean canPreyMove(){
@@ -115,7 +125,7 @@ public class Game {
     newPosAndVel.vel.y = Math.min(Math.max(newPosAndVel.vel.y, -1), 1);
     Point target = add(newPosAndVel.pos, newPosAndVel.vel);
     if(!isOccupied(target)){
-      newPosAndVel.pos = add(newPosAndVel.pos, newPosAndVel.vel);
+      newPosAndVel.pos = target;
     } else {
       if(newPosAndVel.vel.x == 0 || newPosAndVel.vel.y == 0){
         if(newPosAndVel.vel.x != 0){
