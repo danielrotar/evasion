@@ -23,10 +23,10 @@ public class Game {
     }
     Point prevHunterPos = new Point(state.hunterPosAndVel.pos);
     state.hunterPosAndVel = move(state.hunterPosAndVel);
+    doBuildAction(prevHunterPos, hunterWallAction);
     if(canPreyMove()) {
       state.preyPos = move(new PositionAndVelocity(state.preyPos, preyMovement)).pos;
     }
-    doBuildAction(prevHunterPos, hunterWallAction);
     state.ticknum++;
     if(state.wallTimer > 0){
       state.wallTimer--;
