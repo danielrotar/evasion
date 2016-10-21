@@ -51,7 +51,7 @@ A vertical wall is identified by: `1 [x] [y1] [y2]` where `x` is its x location,
 
 The order of the `{wall info}` sets is relevent; when the hunter references a wall to delete it should do so using the wall's place in this list, starting at 0.
 
-Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player. (Players are not permitted to know how close their opponents are to exhausting their time limits.)
+Note that both players get the same game state information each tick, EXCEPT for playerTimeLeft which is specific to the given player (and given in milliseconds). (Players are not permitted to know how close their opponents are to exhausting their time limits.)
 
 # Hunter
 
@@ -67,7 +67,7 @@ In response to each received game state message, the hunter should send the foll
 
 Each `[wall index to delete]` specifies a wall to be deleted, based on its position (starting at 0) in the game state message. There can be any number of these, or none. Asking to delete a wall index that doesn't exist has no effect.
 
-The hunter bounce behavior is as follows (* = wall, arrow = hunter moving in the direction it points):
+The hunter bounce behavior is as follows (* = wall or arena boundary, arrow = hunter moving in the direction it points):
 
 ```
 First the pixels adjacent to both the hunter and the one being hit are considered...
@@ -145,6 +145,12 @@ In response to each received game state message, the prey should send the follow
 
 The x and y movement specifies the direction in which the prey wishes to travel. This should be 1, 0, or -1 for each -- values outside this range will be clamped. On ticks in which the prey can't move (`tickNum % 2 == 0`), these fields will have no effect, but placeholder values should still be sent.
 
+# Capture
+
+As noted in the class site game overview, the game is over when the Euclidean distance between hunter and prey is within four, and there is no wall between them. Specifically, this implementation calculates whether a wall is between them by using [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) to find the points approximately on the line segment connecting them, and testing whether a wall occupies any of those points. 
+
+Specifically, this [helpful reference](http://www.roguebasin.com/index.php?title=Bresenham%27s_Line_Algorithm#Ruby) was used as a guideline for implementing the algorithm. The Ruby version specifically was translated into a Java implementation for use in this project.
+
 # Other notes
 
 Each player has two minutes of "thinking" time, which can be distributed across ticks as they see fit. If a player's total elapsed time reaches zero on any turn, they forfeit. (Note: this is basically the opposite of what was described in class -- the realtime, 1/60th of a second per tick, server-ignoring-old-moves system has been scrapped.)
@@ -159,6 +165,5 @@ To run: `python random_player.py [port on which to connect]`
 
 # TODO
 
-* Prevent game over when prey and hunter are close but separated by a wall.
 * Design and implement a visual game display.
 * Fix any bugs that are inevitably present.
