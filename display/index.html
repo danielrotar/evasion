@@ -1,0 +1,27 @@
+<html>
+	<header>
+		<title>Evasion</title>
+	</header>
+	<body>
+
+		<canvas id="canvas" width="600" height="600">
+                  Your browser does not support the HTML5 canvas tag.
+        </canvas>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script type="text/javascript">
+
+            var socket = io("127.0.0.1:" + location.port);
+
+            var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+
+			socket.on('to_client', function(data)
+			{
+			    console.log(data);
+			});
+
+        </script>
+	</body>
+</html>
