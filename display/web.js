@@ -20,11 +20,39 @@ var webserver = http.createServer(function (request, response)
 
 var io = require('socket.io')(webserver);
 
+var hunter = "";
+var prey = "";
+var results = [];
+var finalresult = "";
+
 net.createServer(function (socket) {
   var i = rl.createInterface(socket, socket);
   i.on('line', function (line) {
     console.log(line);
-    io.sockets.emit('to_client', line);
+    if(line.startsWith("hunter: ")){
+      hunter = line.substring(8);
+      finalresult = "";
+    } else if(line.startsWith("prey: ")) {
+      prey = line.substring(6);
+      finalresult = "";
+    } else if(line.startsWith("result: ")) {
+      results.push(line.substring(8));
+      finalresult = "";
+    } else if(line.startsWith("finalresult: ")) {
+      finalresult = line.substring(13);
+    } else if(line == "done") {
+      hunter = "";
+      prey = "";
+      results = [];
+    } else {
+      finalresult = "";
+      var obj = {};
+      obj.hunter = hunter;
+      obj.prey = prey;
+      obj.results = results;
+      obj.state = line;
+      io.sockets.emit('to_client', obj);
+    }
   });
   socket.on('error', function(err){
     console.log('socket error:\n${err.stack}');
