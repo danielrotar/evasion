@@ -8,8 +8,6 @@ This is the implementation of the architecture for the [evasion game](http://cs.
 * Apache Maven
 * Node.js (optional, client-side, for display) Tested on v5.5.0
 
-(available on energon2)
-
 # Clone and build
 
 (on energon2)
