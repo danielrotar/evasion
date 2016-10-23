@@ -173,5 +173,5 @@ To run: `python random_player.py [port on which to connect]`
 
 # TODO
 
-* Design and implement a visual game display.
+* Make display show more information and look nicer.
 * Fix any bugs that are inevitably present.
