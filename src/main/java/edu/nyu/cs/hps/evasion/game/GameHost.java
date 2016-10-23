@@ -132,6 +132,18 @@ public class GameHost {
         preyTimeout = preyTime.isNegative();
 
         if(hunterTimeout || preyTimeout){
+          String result;
+          if (hunterTimeout && preyTimeout) {
+            result = "Both timed out!";
+          } else if (hunterTimeout) {
+            result = io.getName(hunterIndex) + " timed out!";
+          } else {
+            result = io.getName(preyIndex) + " timed out!";
+          }
+          System.out.println(result);
+          if(displayWriter != null) {
+            displayWriter.println("result: " + result);
+          }
           break;
         }
 
