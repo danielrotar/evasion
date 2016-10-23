@@ -24,6 +24,7 @@ var hunter = "";
 var prey = "";
 var results = [];
 var finalresult = "";
+var state = "";
 
 net.createServer(function (socket) {
   var i = rl.createInterface(socket, socket);
@@ -41,18 +42,23 @@ net.createServer(function (socket) {
     } else if(line.startsWith("finalresult: ")) {
       finalresult = line.substring(13);
     } else if(line == "done") {
+    } else if(line == "begin") {
       hunter = "";
       prey = "";
       results = [];
-    } else {
       finalresult = "";
-      var obj = {};
-      obj.hunter = hunter;
-      obj.prey = prey;
-      obj.results = results;
-      obj.state = line;
-      io.sockets.emit('to_client', obj);
+      state = "";
+    } else {
+      state = line;
+      finalresult = "";
     }
+    var obj = {};
+    obj.hunter = hunter;
+    obj.prey = prey;
+    obj.results = results;
+    obj.finalresult = finalresult;
+    obj.state = state;
+    io.sockets.emit('to_client', obj);
   });
   socket.on('error', function(err){
     console.log('socket error:\n${err.stack}');

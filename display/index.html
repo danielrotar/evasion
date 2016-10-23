@@ -4,11 +4,21 @@
 	</header>
 	<body>
 
-		<canvas id="canvas" width="600" height="600">
-                  Your browser does not support the HTML5 canvas tag.
-        </canvas>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
 
-        <script src="/socket.io/socket.io.js"></script>
+		<canvas id="canvas" width="302" height="302">
+                  Your browser does not support the HTML5 canvas tag.
+        </canvas><br /><br />
+
+		Hunter: <span id="hunter-name"></span><br />
+		Prey: <span id="prey-name"></span><br />
+		<br />
+		Results:<br />
+		<span id="results1"></span><br />
+		<span id="results2"></span><br />
+		<br />
+		Final Results: <span id="final-result"></span><br />
 
         <script type="text/javascript">
 
@@ -19,9 +29,73 @@
 
 			socket.on('to_client', function(obj)
 			{
-			    console.log(obj);
+				console.log(obj);
+
+				$("#hunter-name").text(obj.hunter);
+				$("#prey-name").text(obj.prey);
+				if(obj.results.length > 0) {
+					$("#results1").text(obj.results[0]);
+				}
+				if(obj.results.length > 1) {
+					$("#results2").text(obj.results[1]);
+				}
+				$("#final-result").text(obj.finalresult);
+				var dataStrs = obj.state.split(" ");
+				var data = dataStrs.map(function(string){return parseInt(string)});
+
+				ctx.fillStyle = "white";
+				ctx.fillRect(0,0,303,303);
+
+				ctx.translate(0.5, 0.5);
+
+				ctx.lineCap = "square";
+
+				ctx.fillStyle = "black";
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(301, 0);
+				ctx.lineTo(301, 301);
+				ctx.lineTo(0, 301);
+				ctx.lineTo(0, 0);
+				ctx.stroke();
+
+				ctx.fillStyle = "red";
+				ctx.fillRect(data[9] + 1, data[10] + 1, 1, 1);
+
+				ctx.fillStyle = "green";
+				ctx.fillRect(data[13] + 1, data[14] + 1, 1, 1);
+
+				for(var i = 0; i < data[15]; i++){
+					var type = data[16 + i*4];
+					if(type == 0){
+						var y = data[16 + i*4 + 1] + 1;
+						var x0 = data[16 + i*4 + 2] + 1;
+						var x1 = data[16 + i*4 + 3] + 1;
+
+						ctx.fillStyle = "black";
+						ctx.beginPath();
+						ctx.moveTo(x0, y);
+						ctx.lineTo(x1, y);
+						ctx.stroke();
+					} else if (type == 1){
+						var x = data[16 + i*4 + 1] + 1;
+						var y0 = data[16 + i*4 + 2] + 1;
+						var y1 = data[16 + i*4 + 3] + 1;
+
+						ctx.fillStyle = "black";
+						ctx.beginPath();
+						ctx.moveTo(x, y0);
+						ctx.lineTo(x, y1);
+						ctx.stroke();
+					}
+				}
+
+				ctx.translate(-0.5, -0.5);
+
 			});
 
         </script>
+
+
 	</body>
 </html>

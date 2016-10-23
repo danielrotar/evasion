@@ -44,6 +44,9 @@ public class GameHost {
   }
 
     System.out.println("Starting game.");
+    if(displayWriter != null) {
+      displayWriter.println("begin");
+    }
 
     int hunterIndex = 0;
     int preyIndex = 1;
