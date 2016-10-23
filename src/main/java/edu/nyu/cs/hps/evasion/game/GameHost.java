@@ -86,23 +86,44 @@ public class GameHost {
         IO.Response hunterResponse = null;
         IO.Response preyResponse = null;
 
+        Future<IO.Response> hunterResponseFuture = null;
         try {
-          Future<IO.Response> hunterResponseFuture = io.getResponse(hunterIndex, hunterTime.toMillis() + " " + gameString);
+          hunterResponseFuture = io.getResponse(hunterIndex, hunterTime.toMillis() + " " + gameString);
           hunterResponse = hunterResponseFuture.get(hunterTime.toNanos(), TimeUnit.NANOSECONDS);
         } catch (TimeoutException e) {
           hunterTimeout = true;
         }
 
+        Future<IO.Response> preyResponseFuture = null;
         try {
-          Future<IO.Response> preyResponseFuture = io.getResponse(preyIndex, preyTime.toMillis() + " " + gameString);
+          preyResponseFuture = io.getResponse(preyIndex, preyTime.toMillis() + " " + gameString);
           preyResponse = preyResponseFuture.get(preyTime.toNanos(), TimeUnit.NANOSECONDS);
         } catch (TimeoutException e) {
           preyTimeout = true;
         }
 
         if(hunterTimeout || preyTimeout) {
+          String result;
+          if (hunterTimeout && preyTimeout) {
+            result = "Both timed out! Trying to resume...";
+          } else if (hunterTimeout) {
+            result = io.getName(hunterIndex) + " timed out! Trying to resume...";
+          } else {
+            result = io.getName(preyIndex) + " timed out! Trying to resume...";
+          }
+          System.out.println(result);
+          if(displayWriter != null) {
+            displayWriter.println("result: " + result);
+          }
+          if (hunterTimeout) {
+            hunterResponseFuture.get();
+          }
+          if(preyTimeout) {
+            preyResponseFuture.get();
+          }
           break;
         }
+
 
         hunterTime = hunterTime.minus(hunterResponse.elapsed);
         preyTime = preyTime.minus(preyResponse.elapsed);
@@ -171,19 +192,15 @@ public class GameHost {
       }
 
       String result;
-      if(hunterTimeout && preyTimeout){
-        result = "Both timed out!";
-      } else if(hunterTimeout){
-        result = io.getName(hunterIndex) + " timed out!";
-      } else if (preyTimeout){
-        result = io.getName(preyIndex) + " timed out!";
-      } else {
+      if(!hunterTimeout && !preyTimeout){
         result = "Score (hunter=" + io.getName(hunterIndex) + ", prey=" + io.getName(preyIndex) + "): " + game.getState().ticknum;
+        System.out.println(result);
+        if(displayWriter != null) {
+          displayWriter.println("result: " + result);
+        }
       }
-      System.out.println(result);
-      if(displayWriter != null) {
-        displayWriter.println("result: " + result);
-      }
+
+
 
       hunterIndex = 1-hunterIndex;
       preyIndex = 1-preyIndex;
