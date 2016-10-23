@@ -6,6 +6,7 @@ This is the implementation of the architecture for the [evasion game](http://cs.
 
 * Java 8 SDK
 * Apache Maven
+* Node.js (optional, client-side, for display) Tested on v5.5.0
 
 (available on energon2)
 
