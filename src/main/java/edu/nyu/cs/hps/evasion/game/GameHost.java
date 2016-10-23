@@ -38,9 +38,9 @@ public class GameHost {
         } catch (Exception e) {
           System.out.println("Display output error: " + e.getMessage());
           Thread.sleep(1000);
+        }
       }
     }
-  }
 
     System.out.println("Starting game.");
     if(displayWriter != null) {
@@ -77,6 +77,9 @@ public class GameHost {
       boolean preyTimeout = false;
       boolean done = false;
       while (!done) {
+        hunterTimeout = false;
+        preyTimeout = false;
+
         String gameString = gameNum + " " + game.getState().toString();
 
         if(displayWriter != null) {
@@ -211,8 +214,6 @@ public class GameHost {
           displayWriter.println("result: " + result);
         }
       }
-
-
 
       hunterIndex = 1-hunterIndex;
       preyIndex = 1-preyIndex;
