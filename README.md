@@ -174,4 +174,3 @@ To run: `python random_player.py [port on which to connect]`
 # TODO
 
 * Make display show more information and look nicer.
-* Fix any bugs that are inevitably present.
