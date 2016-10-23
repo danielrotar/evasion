@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,39 +83,21 @@ public class GameHost {
           displayWriter.println(hunterTime.toMillis() + " " + preyTime.toMillis() + " " + gameString);
         }
 
-        Future<IO.Response> hunterResponseFuture = io.getResponse(hunterIndex, hunterTime.toMillis() + " " + gameString);
-        Future<IO.Response> preyResponseFuture = io.getResponse(preyIndex, preyTime.toMillis() + " " + gameString);
-
         IO.Response hunterResponse = null;
         IO.Response preyResponse = null;
-        if(hunterTime.minus(preyTime).isNegative()){
-          Instant start = Instant.now();
-          try {
-            hunterResponse = hunterResponseFuture.get(hunterTime.toNanos(), TimeUnit.NANOSECONDS);
-          } catch (TimeoutException e) {
-            hunterTimeout = true;
-          }
-          Duration elapsed = Duration.between(start, Instant.now());
-          Duration toWait = preyTime.minus(elapsed);
-          try {
-            preyResponse = preyResponseFuture.get(toWait.toNanos(), TimeUnit.NANOSECONDS);
-          } catch (TimeoutException e) {
-            preyTimeout = true;
-          }
-        } else {
-          Instant start = Instant.now();
-          try {
-            preyResponse = preyResponseFuture.get(preyTime.toNanos(), TimeUnit.NANOSECONDS);
-          } catch (TimeoutException e) {
-            preyTimeout = true;
-          }
-          Duration elapsed = Duration.between(start, Instant.now());
-          Duration toWait = hunterTime.minus(elapsed);
-          try {
-            hunterResponse = hunterResponseFuture.get(toWait.toNanos(), TimeUnit.NANOSECONDS);
-          } catch (TimeoutException e) {
-            hunterTimeout = true;
-          }
+
+        try {
+          Future<IO.Response> hunterResponseFuture = io.getResponse(hunterIndex, hunterTime.toMillis() + " " + gameString);
+          hunterResponse = hunterResponseFuture.get(hunterTime.toNanos(), TimeUnit.NANOSECONDS);
+        } catch (TimeoutException e) {
+          hunterTimeout = true;
+        }
+
+        try {
+          Future<IO.Response> preyResponseFuture = io.getResponse(preyIndex, preyTime.toMillis() + " " + gameString);
+          preyResponse = preyResponseFuture.get(preyTime.toNanos(), TimeUnit.NANOSECONDS);
+        } catch (TimeoutException e) {
+          preyTimeout = true;
         }
 
         if(hunterTimeout || preyTimeout) {
