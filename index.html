@@ -13,6 +13,9 @@
 
 		<span id="hunter-name" style="color:darkred;"></span> vs <span id="prey-name" style="color:darkgreen;"></span><br />
 		<br />
+		Tick number: <span id="tick"></span><br />
+		Time left: <span id="hunter-tl" style="color:darkred;"></span> <span id="prey-tl" style="color:darkgreen;"></span><br />
+		<br />
 		Active game results:<br />
 		<span id="results1"></span><br />
 		<span id="results2"></span><br />
@@ -32,6 +35,7 @@
 
             var canvas = document.getElementById('canvas');
 			var ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
 
             var obj = {};
             obj.state = "";
@@ -101,6 +105,9 @@
 
 		            $("#tick").text(data[3]);
 
+		            $("#hunter-tl").text(data[0]/1000.0);
+		            $("#prey-tl").text(data[1]/1000.0);
+
 		            ctx.fillStyle = "white";
 		            ctx.fillRect(0, 0, 303, 303);
 
@@ -118,10 +125,10 @@
 		            ctx.stroke();
 
 		            ctx.fillStyle = "red";
-		            ctx.fillRect(data[9] + 1, data[10] + 1, 1, 1);
+		            ctx.fillRect(data[9], data[10], 3, 3);
 
 		            ctx.fillStyle = "green";
-		            ctx.fillRect(data[13] + 1, data[14] + 1, 1, 1);
+		            ctx.fillRect(data[13], data[14], 3, 3);
 
 		            for (var i = 0; i < data[15]; i++) {
 			            var type = data[16 + i * 4];
