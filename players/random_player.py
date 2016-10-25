@@ -26,8 +26,8 @@ while True:
 
     print "received: " + line
 
-    val = .01
-    time.sleep(val)
+    #val = .01
+    #time.sleep(val)
 
     tosend = None
 
